@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  starkgateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8545:8545"
+    environment:
+      - UPSTREAM_RPC=https://eth.rpc.bloxroute.com
+      - FLASHBOTS_RELAY=https://relay.flashbots.net
+      - PORT=8545
+      - FEE_PERCENTAGE=0.10
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8545/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
