@@ -8,7 +8,7 @@ Change one line in your backend:
 const provider = new ethers.JsonRpcProvider("https://alchemy.com");
 
 // AFTER (That's it!)
-const provider = new ethers.JsonRpcProvider("https://starkgateway.io:8545");
+const provider = new ethers.JsonRpcProvider("https://stark-gateway-1.onrender.com");
 ```
 
 ---

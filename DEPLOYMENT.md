@@ -46,11 +46,22 @@ This prints a public URL like `https://friendly-name.loca.lt` that your clients 
 
 > Good for demos, testing, and early sign-ups. Not for long-term production.
 
-### **Option 2: Render Free Tier**
+### **Option 2: Render Free Tier (LIVE NOW!)**
 Render offers a free web service plan that supports Docker deployments.
 
+**✅ StarkGateway is already deployed and live at:**
+```
+https://stark-gateway-1.onrender.com
+```
+
+**Use this endpoint directly in your code:**
+```javascript
+const provider = new ethers.JsonRpcProvider("https://stark-gateway-1.onrender.com");
+```
+
+**For your own deployment:**
 1. Create a free Render account.
-2. Connect your GitHub repo.
+2. Connect your GitHub repo (StarkX-cloud/stark-gateway).
 3. Create a new Web Service.
 4. Choose Docker deployment and set the port to `8545`.
 5. Add environment variables in Render:
@@ -66,7 +77,7 @@ TRUSTED_CLIENTS=
 FORCE_PRIVATE_SEND_TX=true
 ```
 
-6. Deploy and use the Render URL.
+6. Deploy and use your Render URL.
 
 ### **Option 3: Railway Free Tier**
 Railway offers a free tier suitable for early development and low traffic.
