@@ -4,9 +4,182 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StarkGateway | Private MEV RPC for Builders</title>
-  <meta http-equiv="refresh" content="0;url=/landing.html" />
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #0f172a;
+      background: #f8fafc;
+      line-height: 1.7;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+    a { color: inherit; }
+    .page { max-width: 1200px; margin: 0 auto; padding: 28px 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; padding: 18px 0; }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .brand-mark { width: 46px; height: 46px; border-radius: 16px; background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%); display: flex; align-items: center; justify-content: center; color: #ffffff; font-weight: 800; font-size: 1.1rem; }
+    .brand-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+    .nav { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+    .nav a { text-decoration: none; color: #334155; font-weight: 600; transition: color .2s ease; }
+    .nav a:hover { color: #0f172a; }
+    .button { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; border-radius: 999px; border: none; cursor: pointer; background: #2563eb; color: #ffffff; font-weight: 700; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-1px); background: #1d4ed8; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr); gap: 48px; align-items: center; padding: 72px 0 36px; }
+    .hero h1 { font-size: clamp(3.4rem, 4vw, 4.8rem); line-height: 0.96; margin: 0; letter-spacing: -0.06em; }
+    .hero p { max-width: 670px; margin: 24px 0 0; color: #475569; font-size: 1.05rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+    .hero-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 28px; padding: 32px; box-shadow: 0 36px 90px rgba(15, 23, 42, 0.08); }
+    .hero-code { margin-top: 24px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 22px; padding: 26px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Consolas, Monaco, monospace; font-size: 0.95rem; color: #0f172a; }
+    .hero-code code { white-space: pre; display: block; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 18px; min-height: 220px; }
+    .card strong { font-size: 1.1rem; color: #0f172a; }
+    .card p { margin: 0; color: #475569; font-size: 0.98rem; line-height: 1.75; }
+    .label-pill { display: inline-flex; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(37, 99, 235, 0.18); color: #1d4ed8; background: rgba(37, 99, 235, 0.08); font-weight: 700; font-size: 0.88rem; letter-spacing: 0.02em; }
+    .section { padding: 72px 0; }
+    .section-heading { display: flex; flex-direction: column; gap: 16px; max-width: 720px; }
+    .section-heading h2 { margin: 0; font-size: clamp(2rem, 2.5vw, 2.75rem); line-height: 1.05; }
+    .section-heading p { margin: 0; color: #64748b; font-size: 1rem; }
+    .testimonial { padding: 36px; border-radius: 28px; background: #020617; color: #f8fafc; position: relative; overflow: hidden; }
+    .testimonial::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), transparent 35%); pointer-events: none; }
+    .testimonial-content { position: relative; z-index: 1; display: grid; gap: 20px; }
+    .testimonial p { margin: 0; color: #cbd5e1; font-size: 1.03rem; line-height: 1.8; }
+    .testimonial cite { margin-top: 10px; display: block; color: #ffffff; font-size: 0.98rem; font-weight: 700; }
+    .logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 28px; }
+    .logos span { display: inline-flex; align-items: center; justify-content: center; min-width: 120px; height: 48px; border-radius: 16px; border: 1px solid #e2e8f0; background: #ffffff; color: #334155; font-weight: 700; font-size: 0.9rem; }
+    .footer { text-align: center; padding: 44px 0 14px; color: #64748b; font-size: 0.95rem; }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .hero-card, .hero-code { width: 100%; }
+    }
+    @media (max-width: 700px) {
+      .page { padding: 20px 18px; }
+      header { justify-content: center; }
+      .nav { justify-content: center; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting to <a href="/landing.html">StarkGateway landing page</a>...</p>
+  <div class="page">
+    <header>
+      <a class="brand" href="#">
+        <span class="brand-mark">S</span>
+        <span class="brand-title">StarkGateway</span>
+      </a>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#get-started" class="button">Get started</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <span class="label-pill">Private MEV RPC</span>
+        <h1>One RPC endpoint. Private execution. MEV capture built in.</h1>
+        <p>StarkGateway turns your standard Ethereum RPC into a private MEV-aware gateway with no code changes. Point your app and let the gateway route, protect, and collect value automatically.</p>
+        <div class="hero-actions">
+          <a href="#get-started" class="button">Start free</a>
+          <a href="#how" class="button" style="background:#f8fafc; color:#0f172a;">See flow</a>
+        </div>
+        <div class="hero-card">
+          <div class="hero-code"><code>const provider = new ethers.JsonRpcProvider("https://stark-gateway-1.onrender.com");
+
+const tx = await provider.send("eth_sendRawTransaction", [rawTxHex]);
+console.log(tx);</code></div>
+        </div>
+      </div>
+      <div>
+        <div class="grid-3" style="margin-top:28px;">
+          <div class="card" style="background:#eff6ff; border-color:transparent;">
+            <strong>Zero code changes</strong>
+            <p>Integrate by replacing a single RPC URL.</p>
+          </div>
+          <div class="card" style="background:#eff6ff; border-color:transparent;">
+            <strong>Multi-builder routing</strong>
+            <p>Send bundles to multiple relays at once for better inclusion.</p>
+          </div>
+          <div class="card" style="background:#eff6ff; border-color:transparent;">
+            <strong>Sandwich protection</strong>
+            <p>Block frontrunning attempts and keep traffic safe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-heading">
+        <p style="text-transform:uppercase; color:#2563eb; letter-spacing:0.18em; font-size:0.82rem; margin-bottom:8px;">What you get</p>
+        <h2>MEV infrastructure made simple for builders.</h2>
+        <p>Self-hosted or free-tier deploys, one endpoint, and no smart contract changes. StarkGateway extracts value without changing your app flow.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <strong>Private bundle execution</strong>
+          <p>Keep transactions out of public mempools and submit directly to private builders.</p>
+        </div>
+        <div class="card">
+          <strong>MEV detection</strong>
+          <p>Recognizes DEX swaps and arbitrage flows, then routes the transaction to capture value.</p>
+        </div>
+        <div class="card">
+          <strong>Free-tier ready</strong>
+          <p>Deploy on Render, Railway, Fly.io, or local tunnel before scaling into paid infrastructure.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="section-heading">
+        <p style="text-transform:uppercase; color:#2563eb; letter-spacing:0.18em; font-size:0.82rem; margin-bottom:8px;">How it works</p>
+        <h2>One flow. One endpoint. Full MEV capture.</h2>
+        <p>Every transaction is analyzed, privately routed, and optionally monetized with dynamic fee logic. Your application uses the same RPC call pattern.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <strong>Point your app</strong>
+          <p>Replace the RPC URL in your backend with your StarkGateway endpoint.</p>
+        </div>
+        <div class="card">
+          <strong>Analyze transaction</strong>
+          <p>Detect swap selectors, DEX routes, and potential backrun opportunities.</p>
+        </div>
+        <div class="card">
+          <strong>Submit privately</strong>
+          <p>Send the bundle to multiple builder relays with mempool fallback if needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="get-started">
+      <div class="section-heading">
+        <p style="text-transform:uppercase; color:#2563eb; letter-spacing:0.18em; font-size:0.82rem; margin-bottom:8px;">Deploy without cost</p>
+        <h2>Free tier launch for validation before spend.</h2>
+        <p>Use local tunnel, Render, Railway, or Fly.io to expose your gateway instantly. Keep the path simple and send the link to your team.</p>
+      </div>
+      <div class="logos">
+        <span>Render</span>
+        <span>Railway</span>
+        <span>Fly.io</span>
+        <span>Local Tunnel</span>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 12px; padding-bottom: 12px;">
+      <div class="testimonial">
+        <div class="testimonial-content">
+          <p>“We were able to swap our RPC URL in minutes and start testing private MEV routing immediately. The gateway handled the rest.”</p>
+          <cite>— Lead Engineer, DeFi Launcher</cite>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>StarkGateway — Private MEV RPC for builders. Simple integration. Immediate protection.</p>
+    </footer>
+  </div>
 </body>
 </html>
